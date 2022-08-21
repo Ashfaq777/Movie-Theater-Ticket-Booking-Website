@@ -1,0 +1,160 @@
+{% load static %}
+<!--
+author: W3layouts
+author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>One Movies an Entertainment Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
+
+<link href="{% static 'movietheater/css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
+<link href="{% static 'movietheater/css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="{% static 'movietheater/css/contactstyle.css' %}" type="text/css" media="all" />
+<link rel="stylesheet" href="{% static 'movietheater/css/faqstyle.css' %}" type="text/css" media="all" />
+<link href="{% static 'movietheater/css/single.css' %}" rel='stylesheet' type='text/css' />
+<link href="{% static 'movietheater/css/medile.css' %}" rel='stylesheet' type='text/css' />
+<!-- banner-slider -->
+<link href="{% static 'movietheater/css/jquery.slidey.min.css' %}" rel="stylesheet">
+<!-- //banner-slider -->
+<!-- pop-up -->
+<link href="{% static 'movietheater/css/popuo-box.css' %}" rel="stylesheet" type="text/css" media="all" />
+<!-- //pop-up -->
+<!-- font-awesome icons -->
+<link rel="stylesheet" href="{% static 'movietheater/css/font-awesome.min.css' %}" />
+<!-- //font-awesome icons -->
+<!-- js -->
+<script type="text/javascript" src="{% static 'movietheater/js/jquery-2.1.4.min.js' %}"></script>
+<!-- //js -->
+<!-- banner-bottom-plugin -->
+<link href="{% static 'movietheater/css/owl.carousel.css' %}" rel="stylesheet" type="text/css" media="all">
+<script src="{% static 'movietheater/js/owl.carousel.js' %}"></script>
+<script>
+	$(document).ready(function() { 
+		$("#owl-demo").owlCarousel({
+	 
+		  autoPlay: 3000, //Set AutoPlay to 3 seconds
+	 
+		  items : 5,
+		  itemsDesktop : [640,4],
+		  itemsDesktopSmall : [414,3]
+	 
+		});
+	 
+	}); 
+</script> 
+<!-- //banner-bottom-plugin -->
+<link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,700italic,700,400italic,300italic,300' rel='stylesheet' type='text/css'>
+<!-- start-smoth-scrolling -->
+<script type="text/javascript" src="{% static 'movietheater/js/move-top.js' %}"></script>
+<script type="text/javascript" src="{% static 'movietheater/js/easing.js' %}"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){		
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+</script>
+<!-- start-smoth-scrolling -->
+</head>
+	
+<body>
+	
+<!-- header -->
+	<div class="header">
+		<div class="container">
+			<div class="w3layouts_logo">
+				<a href="index.html"><h1>One<span>Movies</span></h1></a>
+			</div>
+			<div class="w3_search">
+				<form action="#" method="post">
+					<input type="text" name="Search" placeholder="Search" required="">
+					<input type="submit" value="Go">
+				</form>
+			</div>
+			{% if user.is_authenticated %}
+			<div class="w3l_sign_in_register">
+				<ul>
+					
+					<li><a href="{% url 'logout' %}" >Logout</a></li>
+				</ul>
+			</div>
+			{% else %}
+			<div class="w3l_sign_in_register">
+				<ul>
+					
+					<li><a href="{% url 'login' %}" >Login</a></li>
+				</ul>
+			</div>
+			{% endif %}
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+<!-- //header -->
+
+	
+
+<!-- nav -->
+	<div class="movies_nav">
+		<div class="container">
+			<nav class="navbar navbar-default">
+				<div class="navbar-header navbar-left">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+					<nav>
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="{% url 'index' %}">Home</a></li>
+							
+							
+							
+							
+							<li><a href="{% url 'theaters' %}">ShowTimes</a></li>
+							<li><a href="{{ th.id }}">Buy Tickets</a></li>
+							
+						</ul>
+					</nav>
+				</div>
+			</nav>	
+		</div>
+	</div>
+<!-- //nav -->
+<div class="banner-bottom">
+    <div class="container">
+        <div class="w3_agile_banner_bottom_grid">
+            <div id="owl-demo" class="owl-carousel owl-theme">
+                {% for	th in theaters %}
+                <div class="item">
+                    <div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
+                        <a href="movies/booking.html" class="hvr-shutter-out-horizontal"><img src="{% static th.theater_poster.url %}" title="album-name" class="img-responsive" alt=" " />
+                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                        </a>
+                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                            <div class="w3l-movie-text">
+                                <h6><a href="{% url 'booking_page' th.id %}">{{th.theater_name}}</a></h6>							
+                            </div>
+                            <div class="mid-2 agile_mid_2_home">
+                                
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+                {% endfor %}
+                
+                
+                
+            </div>
+        </div>			
+    </div>
+</div>
