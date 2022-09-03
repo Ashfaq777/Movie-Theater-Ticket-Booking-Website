@@ -7,7 +7,9 @@ from movies.models import Theater, Movie, bookedtickets
 # Create your views here.
 
 def test(request):
-    return render(request, 'movietheater/dashboard.html')
+    theater_list= Theater.objects.all()
+    movie_list= Movie.objects.all()
+    return render(request, 'movietheater/index.html', {"theaters":theater_list, "movies":movie_list})
 def dashboard(request):
     theater_list= Theater.objects.all()
     movie_list= Movie.objects.all()
@@ -16,6 +18,7 @@ def dashboard(request):
     copy_list.append(movie_list[0])
     print("copy list= ",copy_list)
     flag=False
+    #find common movie list
     for i in movie_list:
         for j in copy_list:
             if i.title == j.title :
